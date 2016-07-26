@@ -20,6 +20,7 @@ import org.json.JSONObject;
  */
 public class GoEuroCSVConverter {
     public static final String DEFAULT_OUTPUT_FILE = "output.csv";
+    public String outputFile = "";
     
     public static void main(String[] args) {
         try {
@@ -50,7 +51,8 @@ public class GoEuroCSVConverter {
      * @return                  a boolean indicating whether the operation was successful or not
      */
     public boolean writeCSVFile(ArrayList<String[]> suggestionsList) {
-        try (CSVWriter writer = new CSVWriter(new FileWriter(DEFAULT_OUTPUT_FILE))) {
+        String outputFile = this.outputFile.equals("") ? DEFAULT_OUTPUT_FILE : this.outputFile;
+        try (CSVWriter writer = new CSVWriter(new FileWriter(outputFile))) {
             Iterator<String[]> it = suggestionsList.iterator();
             while(it.hasNext()) {
                 writer.writeNext(it.next());
